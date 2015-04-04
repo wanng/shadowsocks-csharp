@@ -6,17 +6,33 @@ using System.Diagnostics;
 using SimpleJson;
 using Shadowsocks.Controller;
 using System.Text.RegularExpressions;
+using System.ComponentModel;
 
 namespace Shadowsocks.Model
 {
     [Serializable]
-    public class Server
+    public class Server : INotifyPropertyChanged
     {
-        public string server;
+        public string server { get; set; }
         public int server_port;
         public string password;
         public string method;
         public string remarks;
+
+        //for ping test
+        private string _delay;
+        public string delay
+        {
+            get
+            {
+                return _delay;
+            }
+            set
+            {
+                _delay = value;
+                NotifyPropertyChanged("Delay");
+            }
+        }
 
         public string FriendlyName()
         {
@@ -82,6 +98,14 @@ namespace Shadowsocks.Model
             {
                 throw new FormatException();
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
         }
     }
 }

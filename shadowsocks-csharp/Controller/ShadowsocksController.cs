@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Net.Sockets;
+using System.ComponentModel;
 
 namespace Shadowsocks.Controller
 {
@@ -22,6 +23,7 @@ namespace Shadowsocks.Controller
         private Configuration _config;
         private PolipoRunner polipoRunner;
         private GFWListUpdater gfwListUpdater;
+        private ConnectiveChecker connectiveChecker;
         private bool stopped = false;
 
         private bool _systemProxyIsDirty = false;
@@ -49,6 +51,7 @@ namespace Shadowsocks.Controller
         public ShadowsocksController()
         {
             _config = Configuration.Load();
+            connectiveChecker = new ConnectiveChecker();
         }
 
         public void Start()
@@ -212,6 +215,11 @@ namespace Shadowsocks.Controller
             {
                 ConfigChanged(this, new EventArgs());
             }
+        }
+
+        public int Ping(BindingList<Server> servers)
+        {
+            return connectiveChecker.Ping(servers);
         }
 
         protected void Reload()

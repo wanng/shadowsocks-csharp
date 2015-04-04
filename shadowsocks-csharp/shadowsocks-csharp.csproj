@@ -130,6 +130,7 @@
     <Compile Include="Controller\I18N.cs" />
     <Compile Include="Controller\Listener.cs" />
     <Compile Include="Controller\Logging.cs" />
+    <Compile Include="Controller\ConnectiveChecker.cs" />
     <Compile Include="Controller\PortForwarder.cs" />
     <Compile Include="Controller\UpdateChecker.cs" />
     <Compile Include="Encryption\EncryptorBase.cs" />
@@ -163,6 +164,12 @@
     <Compile Include="Controller\ShadowsocksController.cs" />
     <Compile Include="Controller\SystemProxy.cs" />
     <Compile Include="View\MenuViewController.cs" />
+    <Compile Include="View\PingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PingForm.Designer.cs">
+      <DependentUpon>PingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\QRCodeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,6 +187,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PingForm.resx">
+      <DependentUpon>PingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\QRCodeForm.resx">
       <DependentUpon>QRCodeForm.cs</DependentUpon>

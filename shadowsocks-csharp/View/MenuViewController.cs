@@ -42,6 +42,7 @@ namespace Shadowsocks.View
         private MenuItem editGFWUserRuleItem;
         private MenuItem editOnlinePACItem;
         private ConfigForm configForm;
+        private PingForm pingForm;
         private string _urlToOpen;
 
         public MenuViewController(ShadowsocksController controller)
@@ -155,7 +156,8 @@ namespace Shadowsocks.View
                     this.SeperatorItem = new MenuItem("-"),
                     this.ConfigItem = CreateMenuItem("Edit Servers...", new EventHandler(this.Config_Click)),
                     CreateMenuItem("Show QRCode...", new EventHandler(this.QRCodeItem_Click)),
-                    CreateMenuItem("Scan QRCode from Screen...", new EventHandler(this.ScanQRCodeItem_Click))
+                    CreateMenuItem("Scan QRCode from Screen...", new EventHandler(this.ScanQRCodeItem_Click)),
+                    CreateMenuItem("Find Fastest Server...", new EventHandler(this.Ping_Click))
                 }),
                 CreateMenuGroup("PAC ", new MenuItem[] {
                     this.localPACItem = CreateMenuItem("Local PAC", new EventHandler(this.LocalPACItem_Click)),
@@ -175,6 +177,32 @@ namespace Shadowsocks.View
                 new MenuItem("-"),
                 CreateMenuItem("Quit", new EventHandler(this.Quit_Click))
             });
+        }
+
+        private void Ping_Click(object sender, EventArgs e)
+        {
+            showPingForm();
+        }
+
+        private void showPingForm()
+        {
+            if (pingForm != null)
+            {
+                pingForm.Activate();
+            }
+            else
+            {
+                pingForm = new PingForm(controller);
+                pingForm.Show();
+                pingForm.FormClosed += pingForm_FormClosed;
+            }
+        }
+
+        void pingForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            pingForm = null;
+            Util.Utils.ReleaseMemory();
+            ShowFirstTimeBalloon();
         }
 
         private void controller_ConfigChanged(object sender, EventArgs e)

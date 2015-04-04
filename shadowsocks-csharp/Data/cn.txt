@@ -23,6 +23,7 @@ Show Logs...=显示日志...
 About...=关于...
 Quit=退出
 Edit Servers=编辑服务器
+Find Fastest Server...=查找最快服务器...
 
 # Config Form
 
@@ -48,6 +49,16 @@ QRCode=二维码
 Edit Online PAC URL=编辑在线 PAC 网址
 Edit Online PAC URL...=编辑在线 PAC 网址...
 Please input PAC Url=请输入 PAC 网址
+
+# Ping Form
+
+Find Fastest Server=查找最快服务器
+&Find=查找(&F)
+&Apply=应用(&A)
+Delay=延迟
+Wait=稍等
+Error=错误
+
 
 # Messages
 
